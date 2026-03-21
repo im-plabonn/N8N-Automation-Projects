@@ -95,7 +95,7 @@ Email: plabonrahman.me@gmail.com<br>
 Github: https://www.github.com/im-plabonn
 <br>
 <br>
-<p>
+<p align ="center">
 Created for sharing useful n8n automation workflows. Feel free to use and customize.
 </p>
 
