@@ -1,0 +1,303 @@
+{
+  "name": "Robotics Wing, CAFU",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "FU Robotics Crew Collection Form",
+        "formDescription": "FIll the form below to join Robotics Wing, CAFU",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "What's your name?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Batch",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "27(DH)"
+                  },
+                  {
+                    "option": "27(UG)"
+                  },
+                  {
+                    "option": "28(DH)"
+                  },
+                  {
+                    "option": "28(UG)"
+                  },
+                  {
+                    "option": "29(DH)"
+                  },
+                  {
+                    "option": "29(UG)"
+                  },
+                  {
+                    "option": "30(DH)"
+                  },
+                  {
+                    "option": "30(UG)"
+                  },
+                  {
+                    "option": "31(DH)"
+                  },
+                  {
+                    "option": "31(UG)"
+                  },
+                  {
+                    "option": "32(DH)"
+                  },
+                  {
+                    "option": "32(UG)"
+                  },
+                  {
+                    "option": "33(DH)"
+                  },
+                  {
+                    "option": "33(UG)"
+                  },
+                  {
+                    "option": "34(DH)"
+                  },
+                  {
+                    "option": "34(UG)"
+                  },
+                  {
+                    "option": "35(DH)"
+                  },
+                  {
+                    "option": "35(UG)"
+                  },
+                  {
+                    "option": "36(DH)"
+                  },
+                  {
+                    "option": "36(UG)"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "ID",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            }
+          ]
+        },
+        "options": {
+          "respondWithOptions": {
+            "values": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6458155b-6134-47b2-99ff-ac68ac4d8b5f",
+      "name": "On form submission",
+      "webhookId": "a8360277-7563-4edd-9828-edfceef4666d",
+      "notesInFlow": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Your CAFU Robotics Wing Registration – Next Steps",
+        "emailType": "text",
+        "message": "=Dear {{ $json.Name }},\n\nThank you for your interest in joining the Robotics Wing of CAFU (CSE Association of Feni University).\n\nWe are excited to see your enthusiasm for robotics, innovation, and hands-on learning. The CAFU Robotics Wing is focused on helping students explore practical robotics, participate in competitions, build real-world projects, and collaborate with like-minded innovators.\n\nTo complete your joining process, please click the link below:\n\nJoin Link: [Insert Join Link Here]\n\nAfter joining, you will receive updates regarding:\n• Upcoming robotics sessions\n• Workshops and training programs\n• Team projects\n• Competitions and events\n• Community discussions\n\nWe encourage you to stay active and participate regularly to make the most of this opportunity.\n\nIf you face any issues while joining, feel free to reply to this email.\n\nWe look forward to building, learning, and innovating together.\n\nBest regards,\nHabibur Rahman Plabon\nRobotics Wing Leader\nCAFU – CSE Association of Feni University",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        0
+      ],
+      "id": "40a6febd-0c3e-4355-a150-5ca5fcd52537",
+      "name": "Send a message",
+      "webhookId": "e82b9043-b268-44f0-98fb-05bc256ab55e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Yrn2T788uLEJmWlu",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1DHaEtCV6cPfHwPYxdI0o8Ce26lMkREQ9bsPMbJFF7WM",
+          "mode": "list",
+          "cachedResultName": "Robitocs Wing, CAFU\t",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DHaEtCV6cPfHwPYxdI0o8Ce26lMkREQ9bsPMbJFF7WM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Taking Input",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DHaEtCV6cPfHwPYxdI0o8Ce26lMkREQ9bsPMbJFF7WM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json['What\\'s your name?'] }}",
+            "Batch": "={{ $json.Batch }}",
+            "ID": "={{ $json.ID }}",
+            "Email": "={{ $json.Email }}",
+            "submittedAt": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Batch",
+              "displayName": "Batch",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What's your name?",
+              "displayName": "What's your name?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        256,
+        0
+      ],
+      "id": "87ce0e01-55d3-4154-ae41-c2b095dd2ca0",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aoNfEt6sOr5lZaeE",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "fb315c59-d86c-4925-9f31-397712a352ab",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "28b043e5283ebba7347cdcda5fdfa3f193b95a1575430e8a56f0c8b54f5d60dc"
+  },
+  "id": "wx5aNazEAllfdhRN",
+  "tags": [
+    {
+      "name": "CAFU",
+      "id": "FsGUxfBJ2zQdVyyr",
+      "updatedAt": "2026-03-21T17:57:25.336Z",
+      "createdAt": "2026-03-21T17:57:25.336Z"
+    }
+  ]
+}
