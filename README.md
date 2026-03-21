@@ -1,20 +1,19 @@
-<h1 align="center">N8N Automation Projects</h1>
+<h1 align="left">N8N Automation Projects</h1>
 
-<p align="center">
-A collection of ready-to-use n8n automation workflows.<br>
-Import, customize, and start automating instantly.
+<p align="left">
+A collection of ready-to-use n8n automation workflows. Import, customize, and start automating instantly.
 </p>
 
 <hr>
 
-<h2>About This Repository</h2>
+<h2>About This Repository: </h2>
 
 <p>
 This repository contains multiple <strong>n8n automation workflows</strong> designed to help you
 automate tasks quickly and easily.
 </p>
 
-<p>Each project includes:</p>
+<p>Each project includes: </p>
 <ul>
   <li>Ready-to-import n8n workflow JSON file</li>
   <li>Simple automation logic</li>
@@ -24,7 +23,7 @@ automate tasks quickly and easily.
 
 <hr>
 
-<h2>Available Projects</h2>
+<h2>Available Projects: </h2>
 
 <ul>
   <li>Form Automation</li>
@@ -38,7 +37,7 @@ automate tasks quickly and easily.
 
 <hr>
 
-<h2>How to Import Workflow into n8n</h2>
+<h2>How to Import Workflow into n8n: </h2>
 
 <ol>
   <li>Download the workflow JSON file from this repository</li>
@@ -53,7 +52,7 @@ automate tasks quickly and easily.
 
 <hr>
 
-<h2>Requirements</h2>
+<h2>Requirements: </h2>
 
 <ul>
   <li>n8n installed (Cloud or Self-hosted)</li>
@@ -63,7 +62,7 @@ automate tasks quickly and easily.
 
 <hr>
 
-<h2>How to Use</h2>
+<h2>How to Use: </h2>
 
 <ol>
   <li>Choose a project</li>
@@ -75,7 +74,7 @@ automate tasks quickly and easily.
 
 <hr>
 
-<h2>Contributing</h2>
+<h2>Contributing: </h2>
 
 <p>
 You can contribute by submitting:
@@ -89,11 +88,15 @@ You can contribute by submitting:
 
 <hr>
 
-<h2>Author</h2>
-
+<h2>Author: </h2>
+Habibur Rahman Plabon<br>
+Mob.: +8801839399751<br>
+Email: plabonrahman.me@gmail.com<br>
+Github: https://www.github.com/im-plabonn
+<br>
+<br>
 <p>
-Created for sharing useful n8n automation workflows.<br>
-Feel free to use and customize.
+Created for sharing useful n8n automation workflows. Feel free to use and customize.
 </p>
 
 <hr>
