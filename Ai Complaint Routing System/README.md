@@ -1,4 +1,4 @@
-<h1>🤖 AI-Powered Intelligent Complaint Routing System</h1>
+<h1>AI-Powered Intelligent Complaint Routing System</h1>
 
 <p>
 An AI-driven automation workflow that analyzes user feedback and automatically routes it to the correct department using <b>n8n</b>. This system eliminates manual sorting, reduces response time, and ensures every complaint reaches the right team instantly.
@@ -14,7 +14,7 @@ An AI-driven automation workflow that analyzes user feedback and automatically r
 
 <hr/>
 
-<h2>🚀 Features</h2>
+<h2>Features: </h2>
 
 <div class="card">
 <ul>
@@ -28,7 +28,7 @@ An AI-driven automation workflow that analyzes user feedback and automatically r
 </ul>
 </div>
 
-<h2>🧠 AI Categories</h2>
+<h2>AI Categories: </h2>
 
 <div class="card">
 <ul>
@@ -45,7 +45,7 @@ An AI-driven automation workflow that analyzes user feedback and automatically r
 </ul>
 </div>
 
-<h2>⚙️ Workflow Overview</h2>
+<h2>Workflow Overview: </h2>
 
 <div class="card">
 <ol>
@@ -59,13 +59,13 @@ An AI-driven automation workflow that analyzes user feedback and automatically r
 </ol>
 </div>
 
-<h2>🔄 Workflow Architecture</h2>
+<h2>Workflow Architecture:</h2>
 
 <div class="code">
 Form Submission → AI Agent → Category Detection → Google Sheets → Switch Node → Department Email
 </div>
 
-<h2>📩 Department Routing Example</h2>
+<h2>Department Routing Example: </h2>
 
 <div class="card">
 <ul>
@@ -77,7 +77,7 @@ Form Submission → AI Agent → Category Detection → Google Sheets → Switch
 </ul>
 </div>
 
-<h2>🛠 Tech Stack</h2>
+<h2>Tech Stack: </h2>
 
 <div class="card">
 <ul>
@@ -91,7 +91,7 @@ Form Submission → AI Agent → Category Detection → Google Sheets → Switch
 </ul>
 </div>
 
-<h2>🎯 Use Cases</h2>
+<h2>Use Cases: </h2>
 
 <div class="card">
 <ul>
@@ -104,7 +104,7 @@ Form Submission → AI Agent → Category Detection → Google Sheets → Switch
 </ul>
 </div>
 
-<h2>📈 Benefits</h2>
+<h2>Benefits: </h2>
 
 <div class="card">
 <ul>
@@ -117,7 +117,7 @@ Form Submission → AI Agent → Category Detection → Google Sheets → Switch
 </ul>
 </div>
 
-<h2>🧪 Example Input</h2>
+<h2>Example Input: </h2>
 
 <div class="code">
 Name: John Doe
@@ -125,7 +125,7 @@ Email: john@email.com
 Feedback: I can't login to my account and reset password is not working
 </div>
 
-<h2>🤖 AI Output</h2>
+<h2>AI Output: </h2>
 
 <div class="code">
 Category: Authentication Issue
@@ -133,7 +133,7 @@ Department: Backend Team
 Action: Send Email + Log to Sheet
 </div>
 
-<h2>🔮 Future Improvements</h2>
+<h2>Future Improvements: </h2>
 
 <div class="card">
 <ul>
@@ -146,10 +146,10 @@ Action: Send Email + Log to Sheet
 </ul>
 </div>
 
-<h2>Author</h2>
+<h2>Author: </h2>
 
 <div class="card">
-<b>Plabon Rahman</b>
+<b>Habibur Rahman Plabon</b>
 <br/>
 AI Automation Builder
 <br/>
