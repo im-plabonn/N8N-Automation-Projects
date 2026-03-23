@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Complaint Routing System</title>
-<style>
-body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;margin:0;padding:0;background:#0f172a;color:#e2e8f0}
-.container{max-width:1000px;margin:auto;padding:40px}
-h1,h2,h3{color:#f8fafc}
-.badge{display:inline-block;padding:6px 10px;border-radius:8px;background:#1e293b;margin-right:6px;font-size:12px}
-.card{background:#020617;border:1px solid #1e293b;padding:20px;border-radius:14px;margin:20px 0}
-ul{padding-left:20px}
-.code{background:#020617;border:1px solid #1e293b;padding:15px;border-radius:10px;overflow:auto}
-.footer{margin-top:40px;font-size:14px;color:#94a3b8}
-hr{border:0;border-top:1px solid #1e293b;margin:30px 0}
-</style>
-</head>
-<body>
-<div class="container">
-
 <h1>🤖 AI-Powered Intelligent Complaint Routing System</h1>
 
 <p>
