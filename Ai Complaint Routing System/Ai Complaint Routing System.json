@@ -1,0 +1,597 @@
+{
+  "name": "Complain Form",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Submit a Complaint",
+        "formDescription": "Please describe the issue you encountered. Our system will automatically categorize your report and send it to the appropriate team. Include steps, page name, and expected behavior if possible.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Feedback"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        48,
+        0
+      ],
+      "id": "7084344b-ea6f-4614-8237-72c66ea92ec4",
+      "name": "On form submission",
+      "webhookId": "6b053688-8c49-4559-85e3-5ab3f3268b40"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a support ticket classifier for a website.\nYour task is to read the user's complaint and assign it to exactly ONE category from the list below.\n\nCategories:\n\nFrontend (UI Team):\n\n* UI/UX Issue → layout, spacing, alignment, design confusion, readability, navigation problem\n* Responsive / Mobile Issue → mobile view broken, tablet issue, screen overflow, element not fitting screen\n* Visual Bug → wrong color, font issue, icon missing, overlapping text, UI glitch\n* Button / Interaction Issue → button not clickable, dropdown not opening, modal not closing, click not working (UI side)\n* Browser Compatibility Issue → works in one browser but not another, Chrome/Firefox/Safari specific issue\n\nBackend (Server Team):\n\n* Functionality Error → feature not working, form not submitting, action fails after click\n* API Error → failed request, API error message, webhook issue, third-party API problem\n* Database / Data Issue → data not saving, wrong data, missing data, duplicate data\n* Authentication / Login Issue → login failed, OTP not received, session expired, logout problem\n* Performance / Server Issue → slow loading, timeout, server down, 500 error, long response time\n\nInstructions:\n\n* Read the user's complaint carefully.\n* Choose the single most appropriate category.\n* Do not return multiple categories.\n* Do not explain your reasoning.\n* Do not add extra text.\n* If uncertain, choose the closest matching category.\n* Output must match one category name exactly as written above.\n\nUser Complaint: {{ $json.Feedback }}\n\nOutput:\nReturn only one category name.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "456271b3-b51c-4376-a929-5e80df828fe0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        208
+      ],
+      "id": "a50660df-7a1f-4656-831a-99fdf8e25c9e",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "k5zXhWB5rLJA4S6J",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b0ffbbab-af36-4bb5-bdf2-b2341a4eb9af",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "UI/UX Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1fc4fa43-4544-4a15-af34-004f4ac55216",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Responsive / Mobile Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "daa76e0c-f929-4bef-befb-d7d0634284be",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Visual Bug",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e08934ae-5501-4802-83d6-993c5644ddc6",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Browser Compatibility Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "dd4f65e2-6fb3-4ca8-a096-6859d4c7fe23",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Button / Interaction Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "57dfb5b1-06b3-4dd9-92d5-d8b608b093eb",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Functionality Error",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c080d315-d28d-48cc-a3ba-a25092f2ec6c",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Authentication / Login Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d58bbf39-0581-4f81-8e6b-2e1bb6cd0c5c",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "API Error",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "46d7176c-85d3-47bf-91d2-efbc7186952f",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Database / Data Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c185a4f0-f315-4a92-993d-725ac3176ba9",
+                    "leftValue": "={{ $('AI Agent').item.json.output }}",
+                    "rightValue": "Performance / Server Issue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        -128
+      ],
+      "id": "3d71c295-8f24-4d68-8a22-28ce5572f23c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "robozenbd@gmail.com",
+        "subject": "=Action Required: New Frontend Issue Reported [ID: {{ $execution.id }} ]",
+        "emailType": "text",
+        "message": "=Hello Frontend Team,\n\nA new user complaint has been recorded regarding the user interface/experience. Please review the details below:\n\nComplaint ID: {{ $execution.id }}\n\nReported Category: {{ $('AI Agent').item.json.output }}\n\nIssue Description: {{ $('Append row in sheet').item.json.Feedback }}\n\nKindly investigate the issue, replicate it on the frontend, and update the status in the tracker once resolved.\n\nBest regards,\nAutomated Ticketing System",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        -128
+      ],
+      "id": "e4bf31cc-1ed7-4fc2-bd41-d6ad0402d079",
+      "name": "Send a message2",
+      "webhookId": "49f47f63-8152-4f63-b6d8-61a7ee3d56c0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Yrn2T788uLEJmWlu",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "help.atpsecurities@gmail.com",
+        "subject": "=System Alert: New Backend Issue Reported [ID: {{ $execution.id }} ]",
+        "message": "=Hello Backend Team,\n\nA new user complaint has been flagged as a backend/system-side issue. Please review the details below:\n\nComplaint ID: {{ $execution.id }}\n\nReported Category: {{ $('AI Agent').item.json.output }}\n\nIssue Description: {{ $('Append row in sheet').item.json.Feedback }}\n\nPlease check server logs, database integrity, or API responses related to this category.\n\nBest regards,\nAutomated Ticketing System",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        128
+      ],
+      "id": "0cedaa4c-987c-4a28-9cb7-7df4c69bcf6b",
+      "name": "Send a message3",
+      "webhookId": "49f47f63-8152-4f63-b6d8-61a7ee3d56c0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Yrn2T788uLEJmWlu",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1aqIk-TA_1zl5fi7GXwivcXTWQBf_S5-piAHO4hZ7WPQ",
+          "mode": "list",
+          "cachedResultName": "Complaint Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aqIk-TA_1zl5fi7GXwivcXTWQBf_S5-piAHO4hZ7WPQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aqIk-TA_1zl5fi7GXwivcXTWQBf_S5-piAHO4hZ7WPQ/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Catagory": "={{ $json.output }}",
+            "Name": "={{ $('On form submission').item.json.Name }}",
+            "Email": "={{ $('On form submission').item.json.Email }}",
+            "Feedback": "={{ $('On form submission').item.json.Feedback }}",
+            "Time": "={{ $('On form submission').item.json.submittedAt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Feedback",
+              "displayName": "Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Catagory",
+              "displayName": "Catagory",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        496,
+        0
+      ],
+      "id": "ece038e2-e27f-4582-871a-be3bdcd9febc",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aoNfEt6sOr5lZaeE",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "e941bc4b-3dd2-4eb1-9773-4ba0b2c646f1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "28b043e5283ebba7347cdcda5fdfa3f193b95a1575430e8a56f0c8b54f5d60dc"
+  },
+  "id": "J4U1W9PzBINwEivX",
+  "tags": []
+}
