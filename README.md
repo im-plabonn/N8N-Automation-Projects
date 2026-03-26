@@ -1,4 +1,4 @@
-<h1 align="center">N8N Automation Projects</h1>
+<h1 align="left">N8N Automation Projects</h1>
 
 <p align="left">
 A collection of ready-to-use n8n automation workflows. Import, customize, and start automating instantly.
