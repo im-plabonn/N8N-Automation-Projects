@@ -1,0 +1,402 @@
+{
+  "name": "Domain Availability Checker for .com Domains",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Business Name Availablity Checker(.com)",
+        "formDescription": "Enter a business name to check if the .com domain is available. Sheet URL: https://docs.google.com/spreadsheets/d/1kii0VV1rZ6WElX_Pj9qbiaU_uYAN-NhKwt-rKyd0R0s/edit?usp=sharing",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Business Name",
+              "fieldName": "businessName",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Your Name?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Plabon"
+                  },
+                  {
+                    "option": "Zishan"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Check Name"
+        }
+      },
+      "id": "aab725e8-f3c9-43d6-87ba-245df8d37b7c",
+      "name": "Domain Check Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        256,
+        400
+      ],
+      "webhookId": "ddb747eb-a80f-4965-a93f-64a67c897604"
+    },
+    {
+      "parameters": {
+        "url": "=https://dns.google/resolve?name={{ $json.businessName }}.com&type=A",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "fafebd03-716a-496d-9193-d3207f8880fd",
+      "name": "Query DomainsDB API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": 3,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "006d79ac-60b9-40ec-b147-c6de243559c3",
+      "name": "Check Domain Availability",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        704,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "result",
+              "value": "✅",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "domain",
+              "value": "={{ $('Domain Check Form').item.json.businessName }}.com",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "businessName",
+              "value": "={{ $('Domain Check Form').item.json.businessName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "02ad48bf-16fc-4fd2-be03-631bfa745547",
+      "name": "Return Available",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        992,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "result",
+              "value": "❌",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "domain",
+              "value": "={{ $('Domain Check Form').item.json.businessName }}.com",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "businessName",
+              "value": "={{ $('Domain Check Form').item.json.businessName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dbbd6820-7b1a-45ce-a8de-300eef6f0b85",
+      "name": "Return Not Available",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        992,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Domain Check Form').item.json.businessName }}",
+        "options": {
+          "systemMessage": "You are a business name validator.\n\nFor the given business name, output ONLY:\n\nComment: (max 1 short sentence about memorability or risk)\nStatus: Recommended / Not Recommended\nReason: (very short — e.g., \"unique\", \"already used\", \"too generic\")\n\nRules:\n\nKeep total output under 20 words\nNo extra text\nNo explanation\nFocus mainly on whether similar businesses exist online"
+        }
+      },
+      "id": "3bf928ab-adb5-4538-9f55-610d1996ac77",
+      "name": "Business Name Analyzer",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1184,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1184,
+        640
+      ],
+      "id": "4042b300-3092-43c3-8c3b-693267369c89",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "TJ6Co9B9QG7Jxjze",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1kii0VV1rZ6WElX_Pj9qbiaU_uYAN-NhKwt-rKyd0R0s",
+          "mode": "list",
+          "cachedResultName": "Business Name Availablity",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kii0VV1rZ6WElX_Pj9qbiaU_uYAN-NhKwt-rKyd0R0s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Name",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kii0VV1rZ6WElX_Pj9qbiaU_uYAN-NhKwt-rKyd0R0s/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Business Name": "={{ $('Domain Check Form').item.json.businessName }}",
+            "Comment": "={{ $json.output }}",
+            "Provider Name": "={{ $('Domain Check Form').item.json['Your Name?'] }}",
+            ".com availablity": "={{ $json.result }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Business Name",
+              "displayName": "Business Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": ".com availablity",
+              "displayName": ".com availablity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Comment",
+              "displayName": "Comment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Provider Name",
+              "displayName": "Provider Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1584,
+        496
+      ],
+      "id": "6b5924bc-f3b7-4db2-b181-7ff83f806cad",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3mVTYnMFcIOEjwA7",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Domain Check Form": {
+      "main": [
+        [
+          {
+            "node": "Query DomainsDB API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query DomainsDB API": {
+      "main": [
+        [
+          {
+            "node": "Check Domain Availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Domain Availability": {
+      "main": [
+        [
+          {
+            "node": "Return Available",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Not Available",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Available": {
+      "main": [
+        [
+          {
+            "node": "Business Name Analyzer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Not Available": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Business Name Analyzer": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Business Name Analyzer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "f7425456-4ff8-4feb-a0ef-5e662a78bf6d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc6a10fa0c60247a3cf151cd6b41a3f34eece732c18d1e32d0fd5108c8cce0e4"
+  },
+  "id": "QUyxvoa7qkG940zy",
+  "tags": []
+}
