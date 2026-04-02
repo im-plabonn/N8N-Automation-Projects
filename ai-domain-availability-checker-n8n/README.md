@@ -8,7 +8,7 @@ and reason. The automation helps validate brand names quickly before using them.
 
 <hr/>
 
-<h2>🎯 Main Purpose</h2>
+<h2>Main Purpose: </h2>
 
 <p>
 The main purpose of this project is to automate the process of validating business names 
@@ -25,7 +25,7 @@ by checking domain availability first and then using AI to evaluate the name qua
 
 <hr/>
 
-<h2>⚙️ What This Automation Does</h2>
+<h2>What This Automation Does: </h2>
 
 <ol>
 <li>User provides a business name</li>
@@ -39,7 +39,7 @@ by checking domain availability first and then using AI to evaluate the name qua
 
 <hr/>
 
-<h2>🧠 Example Output</h2>
+<h2>Example Output: </h2>
 
 <pre>
 Business Name: Plabon
@@ -53,7 +53,7 @@ Reason: Unique and brandable
 
 <hr/>
 
-<h2>🔄 Workflow Overview</h2>
+<h2>Workflow Overview: </h2>
 
 <pre>
 User Input
@@ -73,7 +73,7 @@ Save to Google Sheets
 
 <hr/>
 
-<h2>🛠️ Technologies Used</h2>
+<h2>Technologies Used: </h2>
 
 <ul>
 <li>n8n (Workflow Automation)</li>
@@ -85,7 +85,7 @@ Save to Google Sheets
 
 <hr/>
 
-<h2>📦 Requirements</h2>
+<h2>Requirements: </h2>
 
 <ul>
 <li>n8n instance (Cloud or Self-hosted)</li>
@@ -96,7 +96,7 @@ Save to Google Sheets
 
 <hr/>
 
-<h2>🚀 Features</h2>
+<h2>Features: </h2>
 
 <ul>
 <li>Automatic .com domain check</li>
@@ -111,7 +111,7 @@ Save to Google Sheets
 
 <hr/>
 
-<h2>💡 Use Cases</h2>
+<h2>Use Cases: </h2>
 
 <ul>
 <li>Startup name validation</li>
@@ -123,7 +123,7 @@ Save to Google Sheets
 
 <hr/>
 
-<h2>📈 Why This Project</h2>
+<h2>Why This Project: </h2>
 
 <p>
 Many people choose business names without checking domain availability. 
@@ -133,7 +133,7 @@ that problem by checking availability first and only evaluating usable names.
 
 <hr/>
 
-<h2>🧪 How To Use</h2>
+<h2>How To Use: </h2>
 
 <ol>
 <li>Import the n8n workflow</li>
@@ -146,7 +146,7 @@ that problem by checking availability first and only evaluating usable names.
 
 <hr/>
 
-<h2>Learning Outcome</h2>
+<h2>Learning Outcome: </h2>
 
 <ul>
 <li>AI workflow automation</li>
@@ -159,10 +159,11 @@ that problem by checking availability first and only evaluating usable names.
 
 <hr/>
 
-<h2>👨‍💻 Author</h2>
+<h2>Author: </h2>
 
 <p>
-Plabon Rahman <br/>
+Habibur Rahman Plabon <br/>
+Python Developer <br/> 
 AI Automation Builder <br/>
-Workflow Automation Enthusiast
+email: plabonrahman.me@gmail.com <br/>
 </p>
